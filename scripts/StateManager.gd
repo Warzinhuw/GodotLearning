@@ -1,10 +1,14 @@
 extends Node2D
 
-# Define states
-enum Action { idle, walk, run, attack }
+class Action:
+	const WALKING = "walk"
+	const IDLE = "idle"
+	const RUNNING = "run"
+	const ATTACKING = "attack"
 
-var currentAction = Action.idle
+var currentAction = Action.IDLE
 var mainCardinalDirection = ""
+@onready var sprite : AnimatedSprite2D = get_node("/root/Floors/StateManager/Player/AnimatedSprite2D")
 
 func _process(delta):
 	update_animation()
@@ -14,10 +18,12 @@ func update_animation():
 		"action": currentAction,
 		"mainCardinalDirection": mainCardinalDirection
 	})
-	
-	$Sprite.play(animationName)
+	print("playing {action}_{mainCardinalDirection} animation".format({
+		"action": currentAction,
+		"mainCardinalDirection": mainCardinalDirection
+	}))
+	sprite.play(animationName)
 
-# Example usage
-func set_state(action: Action, direction: String):
+func set_state(action: String, direction: String):
 	currentAction = action
 	mainCardinalDirection = direction

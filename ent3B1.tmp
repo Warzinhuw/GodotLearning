@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://dd3rs5rphcmta"]
+[gd_scene load_steps=29 format=3 uid="uid://dd3rs5rphcmta"]
 
 [ext_resource type="Texture2D" uid="uid://cieryaayq5grp" path="res://Sprites/fofsamplesprites/envs1.png" id="1_i56xg"]
 [ext_resource type="Texture2D" uid="uid://br1gfx38g1lds" path="res://Sprites/fofsamplesprites/meadow.png" id="2_2ox05"]
+[ext_resource type="Texture2D" uid="uid://bx7cfkbv8i043" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death00.png" id="3_m64b0"]
 [ext_resource type="Script" path="res://scripts/Movement.gd" id="3_mmktx"]
 [ext_resource type="Texture2D" uid="uid://c26oljqd3opk0" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/north/north00.png" id="3_r4npq"]
 [ext_resource type="Script" path="res://scripts/StateManager.gd" id="4_lhicm"]
@@ -330,7 +331,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("20_qxql0")
+"texture": ExtResource("3_m64b0")
 }],
 "loop": true,
 "name": &"idle_south",
@@ -425,10 +426,11 @@ z_index = 255
 position = Vector2(440, 364)
 script = ExtResource("3_mmktx")
 speed = 100
+rotationSpeed = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StateManager/Player"]
 sprite_frames = SubResource("SpriteFrames_45mcw")
-animation = &"idle_south"
+animation = &"idle_north"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateManager/Player"]
 position = Vector2(-7.5, -5)

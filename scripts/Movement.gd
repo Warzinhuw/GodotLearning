@@ -7,17 +7,20 @@ signal hit
 @export var speed = 400
 @export var rotationSpeed = 90.0
 @onready var sprite = $AnimatedSprite2D
+@onready var stateManager : StateManager = get_node("/root/Floors/StateManager")
+var mainCardinalDirection = "south"
 
-func get_input():
+func _physics_process(delta):
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
 	if velocity.x != 0 or velocity.y != 0:
 		var rotationData = getSpriteRotationData(input_direction)
+		mainCardinalDirection = rotationData.mainCardinalDirection
+		stateManager.set_state(StateManager.Action.WALKING, mainCardinalDirection)
 		sprite.flip_h = rotationData.flip
 		sprite.rotation_degrees = rotationData.rotateByDegrees
-
-func _physics_process(delta):
-	get_input()
+	else:
+		stateManager.set_state(StateManager.Action.IDLE, mainCardinalDirection)
 	move_and_slide()
 	
 # Given a direction, returns a set of data that helps the sprite renderer decide which animation to use, and how to flip or rotate the sprite.
