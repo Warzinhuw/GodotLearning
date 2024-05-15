@@ -1,8 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://clbobdr1vvfo3"]
+[gd_scene load_steps=20 format=3 uid="uid://c51mxuel0nsfj"]
 
-[ext_resource type="Script" path="res://scripts/creatures/CreatureStateManager.gd" id="1_l2amd"]
-[ext_resource type="Script" path="res://scripts/creatures/Monster.gd" id="2_usmhy"]
-[ext_resource type="Script" path="res://scripts/creatures/MonsterMovement.gd" id="3_qgifa"]
+[ext_resource type="Script" path="res://scripts/creatures/Monster/MonsterPhysics.gd" id="3_qgifa"]
 [ext_resource type="Texture2D" uid="uid://bx7cfkbv8i043" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death00.png" id="4_dsf8w"]
 [ext_resource type="Texture2D" uid="uid://cp6f62b7sx7o6" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death01.png" id="5_gxiao"]
 [ext_resource type="Texture2D" uid="uid://dkncno87gho8w" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death02.png" id="6_57adm"]
@@ -15,10 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://cb7ms5dexjsrl" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death09.png" id="13_d0gku"]
 [ext_resource type="Texture2D" uid="uid://buvxhjnk3yw4p" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death10.png" id="14_evmgt"]
 [ext_resource type="Texture2D" uid="uid://c8dypwm71x0cw" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death11.png" id="15_7rshj"]
+[ext_resource type="Texture2D" uid="uid://kgb1u8738g1k" path="res://Sprites/Healthbar/healthbarUnder.png" id="15_xrvuw"]
+[ext_resource type="Texture2D" uid="uid://cfdmvedikuyrc" path="res://Sprites/Healthbar/healthbarProgress.png" id="16_gxk7y"]
+[ext_resource type="Script" path="res://scripts/creatures/Monster/HealthBar.gd" id="16_uhge4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dal4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bvbdo"]
+resource_local_to_scene = true
 animations = [{
 "frames": [],
 "loop": true,
@@ -78,37 +80,67 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gfnvv"]
+resource_local_to_scene = true
 radius = 145.0
 height = 290.0
 
-[node name="CreatureStateManager" type="Node2D"]
-script = ExtResource("1_l2amd")
-
-[node name="Monster" type="Node" parent="."]
-script = ExtResource("2_usmhy")
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="Monster"]
-z_index = 255
-collision_layer = 2
-collision_mask = 2
+[node name="Monster" type="CharacterBody2D"]
 script = ExtResource("3_qgifa")
+creatureName = "Creature Sample"
+currentHealth = 100
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster/CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3dal4")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Monster/CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bvbdo")
 animation = &"walk_south"
 
-[node name="DetectionArea" type="Area2D" parent="Monster/CharacterBody2D"]
+[node name="HealthBar" type="TextureProgressBar" parent="AnimatedSprite2D"]
+anchors_preset = -1
+anchor_left = -0.0208333
+anchor_top = -0.15625
+anchor_right = 1.02083
+anchor_bottom = -0.03125
+offset_left = -48.0
+offset_top = -48.0
+offset_right = -48.0
+offset_bottom = -48.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("15_xrvuw")
+texture_progress = ExtResource("16_gxk7y")
+tint_over = Color(0.0605303, 0.0605303, 0.0605303, 1)
+script = ExtResource("16_uhge4")
+metadata/_edit_use_anchors_ = true
+
+[node name="CreatureName" type="RichTextLabel" parent="AnimatedSprite2D"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -148.0
+offset_top = -48.0
+offset_right = 52.0
+offset_bottom = -25.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+text = "[center]Creature Sample[center]"
+fit_content = true
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 light_mask = 2
 visibility_layer = 2
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster/CharacterBody2D/DetectionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 z_index = 2
 shape = SubResource("CapsuleShape2D_gfnvv")
 debug_color = Color(0.22975, 0.637903, 0, 0.42)
-
-[connection signal="body_entered" from="Monster/CharacterBody2D/DetectionArea" to="Monster/CharacterBody2D" method="_on_detection_area_body_entered"]

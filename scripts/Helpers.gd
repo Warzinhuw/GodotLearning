@@ -1,6 +1,6 @@
 extends Node2D
 
-static func getCardinalDirection(targetDirection: Vector2) -> String:
+func getCardinalDirection(targetDirection: Vector2) -> String:
 	var direction = ""
 	
 	if targetDirection.x > 0:
@@ -26,7 +26,7 @@ static func getCardinalDirection(targetDirection: Vector2) -> String:
 	return direction
 
 # Given a direction, returns a set of data that helps the sprite renderer decide which animation to use, and how to flip or rotate the sprite.
-static func getSpriteRotationData(targetDirection : Vector2):
+func getSpriteRotationData(targetDirection : Vector2):
 	var flip = false
 	var rotateByDegrees = 0
 	var mainCardinalDirection = "undefined"

@@ -1,7 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://cuk2rym5ft6xh"]
+[gd_scene load_steps=26 format=3 uid="uid://cuk2rym5ft6xh"]
 
-[ext_resource type="Script" path="res://scripts/creatures/Movement.gd" id="1_vvr10"]
-[ext_resource type="Script" path="res://scripts/creatures/CreatureStateManager.gd" id="1_x2b20"]
+[ext_resource type="Script" path="res://scripts/creatures/Player/Player.gd" id="1_sw6re"]
 [ext_resource type="Texture2D" uid="uid://dtictjdhjkuev" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/north/north08.png" id="3_fqdc5"]
 [ext_resource type="Texture2D" uid="uid://cxykt62gg3tlb" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk08.png" id="4_gdo20"]
 [ext_resource type="Texture2D" uid="uid://c26oljqd3opk0" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/north/north00.png" id="5_7ra7e"]
@@ -19,7 +18,13 @@
 [ext_resource type="Texture2D" uid="uid://0qalim7soc6y" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk04.png" id="17_rf1r5"]
 [ext_resource type="Texture2D" uid="uid://dqdab6tqvdy5r" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk05.png" id="18_kirg3"]
 [ext_resource type="Texture2D" uid="uid://ot1jnk71jqvc" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk06.png" id="19_hpgg6"]
+[ext_resource type="Texture2D" uid="uid://kgb1u8738g1k" path="res://Sprites/Healthbar/healthbarUnder.png" id="20_3pu7d"]
 [ext_resource type="Texture2D" uid="uid://dc0rfpl7qbyl0" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk07.png" id="20_ovdom"]
+[ext_resource type="Texture2D" uid="uid://cfdmvedikuyrc" path="res://Sprites/Healthbar/healthbarProgress.png" id="21_oj77a"]
+[ext_resource type="Script" path="res://scripts/creatures/Monster/HealthBar.gd" id="22_3m62b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euaxr"]
+size = Vector2(32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7avqt"]
 resource_name = "walk"
@@ -105,47 +110,71 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_euaxr"]
-size = Vector2(32, 32)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f654s"]
 size = Vector2(21.0176, 38.4935)
 
-[node name="Player" type="Node2D"]
-script = ExtResource("1_x2b20")
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_sw6re")
+creatureName = "Admin"
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-z_index = 2
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("1_vvr10")
-speed = null
-rotationSpeed = null
-
-[node name="BasicAttackCooldown" type="Timer" parent="CharacterBody2D"]
-wait_time = 0.5
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
-sprite_frames = SubResource("SpriteFrames_7avqt")
-animation = &"idle_south"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 3
 visibility_layer = 3
 z_index = 2
 shape = SubResource("RectangleShape2D_euaxr")
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7avqt")
+animation = &"idle_south"
+
+[node name="HealthBar" type="TextureProgressBar" parent="AnimatedSprite2D"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -82.0
+offset_top = -43.0
+offset_right = 18.0
+offset_bottom = -33.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("20_3pu7d")
+texture_progress = ExtResource("21_oj77a")
+tint_over = Color(0.0605303, 0.0605303, 0.0605303, 1)
+script = ExtResource("22_3m62b")
+
+[node name="ManaBar" type="TextureProgressBar" parent="AnimatedSprite2D"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -82.0
+offset_top = -29.0
+offset_right = 18.0
+offset_bottom = -19.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("20_3pu7d")
+texture_progress = ExtResource("21_oj77a")
+tint_over = Color(0.0605303, 0.0605303, 0.0605303, 1)
+tint_progress = Color(0, 0.501262, 0.874596, 1)
+script = ExtResource("22_3m62b")
+
+[node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="hitbox" type="Area2D" parent="CharacterBody2D"]
+[node name="hitbox" type="Area2D" parent="."]
+visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(4.5, 11.5)
 scale = Vector2(3.94907, 1.63664)
 shape = SubResource("RectangleShape2D_f654s")
 debug_color = Color(1, 0.000887435, 0.0813889, 0.42)
 
-[connection signal="timeout" from="CharacterBody2D/BasicAttackCooldown" to="CharacterBody2D" method="_on_basic_attack_cooldown_timeout"]
-[connection signal="body_entered" from="CharacterBody2D/hitbox" to="CharacterBody2D" method="_on_hitbox_body_entered"]
-[connection signal="body_exited" from="CharacterBody2D/hitbox" to="CharacterBody2D" method="_on_hitbox_body_exited"]
+[node name="BasicAttackCooldown" type="Timer" parent="."]
+wait_time = 0.5

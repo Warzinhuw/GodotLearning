@@ -1,6 +1,4 @@
-extends Node2D
-
-class_name CreatureStateManager
+class_name CreatureStateManager extends CharacterBody2D
 
 class Action:
 	const WALKING = "walk"
