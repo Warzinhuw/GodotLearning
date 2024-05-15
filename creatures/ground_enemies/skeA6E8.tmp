@@ -1,0 +1,131 @@
+[gd_scene load_steps=23 format=3 uid="uid://diuaq8ey25na0"]
+
+[ext_resource type="Script" path="res://scripts/creatures/ground_enemies/SkeletonWarrior.gd" id="1_k1116"]
+[ext_resource type="Texture2D" uid="uid://cmubq7bt6yqw5" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk N/No Shield/Standing.png" id="1_wp366"]
+[ext_resource type="Texture2D" uid="uid://bhekbmgplvdnh" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk S/No Shield/Standing.png" id="2_7wgln"]
+[ext_resource type="Texture2D" uid="uid://bpolvxdi3tf61" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk N/No Shield/Skeletron Walk N 1.png" id="3_fjs2g"]
+[ext_resource type="Texture2D" uid="uid://dgkrs508swvtl" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk N/No Shield/Skeletron Walk N 2.png" id="4_6mgor"]
+[ext_resource type="Texture2D" uid="uid://dcg33vpgs1tua" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk N/No Shield/Skeletron Walk N 3.png" id="5_pqehm"]
+[ext_resource type="Texture2D" uid="uid://cyj67r5qm6y6h" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk N/No Shield/Skeletron Walk N 4.png" id="6_to2xm"]
+[ext_resource type="Texture2D" uid="uid://by45xcct7rmob" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk N/No Shield/Skeletron Walk N 5.png" id="7_2spfp"]
+[ext_resource type="Texture2D" uid="uid://duw3drvyxyk6g" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk N/No Shield/Skeletron Walk N 6.png" id="8_cn7jt"]
+[ext_resource type="Texture2D" uid="uid://cwjrqfib4j8hk" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk N/No Shield/Skeletron Walk N 7.png" id="9_2jiud"]
+[ext_resource type="Texture2D" uid="uid://cqj08liynrold" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk N/No Shield/Skeletron Walk N 8.png" id="10_4nk4o"]
+[ext_resource type="Texture2D" uid="uid://4ww0udifj1kp" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk S/No Shield/Skeletron Walk S 1.png" id="11_pdfi7"]
+[ext_resource type="Texture2D" uid="uid://lu1u0bqofhkj" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk S/No Shield/Skeletron Walk S 2.png" id="12_cfpcw"]
+[ext_resource type="Texture2D" uid="uid://gedu4m8ccn1e" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk S/No Shield/Skeletron Walk S 3.png" id="13_rltgg"]
+[ext_resource type="Texture2D" uid="uid://b5bxs0wwwkna6" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk S/No Shield/Skeletron Walk S 4.png" id="14_65ehs"]
+[ext_resource type="Texture2D" uid="uid://cnbngw685jkxq" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk S/No Shield/Skeletron Walk S 5.png" id="15_7qavf"]
+[ext_resource type="Texture2D" uid="uid://dn0ym8ht4eky2" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk S/No Shield/Skeletron Walk S 6.png" id="16_3ylr1"]
+[ext_resource type="Texture2D" uid="uid://ch4ebpmbc148m" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk S/No Shield/Skeletron Walk S 7.png" id="17_kqgp1"]
+[ext_resource type="Texture2D" uid="uid://crkok88v0cujc" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk S/No Shield/Skeletron Walk S 8.png" id="18_3ykhq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0syt1"]
+size = Vector2(32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3l6b7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wp366")
+}],
+"loop": true,
+"name": &"idle_north",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7wgln")
+}],
+"loop": true,
+"name": &"idle_south",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fjs2g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6mgor")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pqehm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_to2xm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2spfp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_cn7jt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2jiud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_4nk4o")
+}],
+"loop": true,
+"name": &"walk_north",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_pdfi7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_cfpcw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_rltgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_65ehs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_7qavf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_3ylr1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_kqgp1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_3ykhq")
+}],
+"loop": true,
+"name": &"walk_south",
+"speed": 15.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ntch"]
+radius = 145.0
+height = 290.0
+
+[node name="SkeletonWarrior" type="CharacterBody2D"]
+script = ExtResource("1_k1116")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 2.5)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_0syt1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3l6b7")
+animation = &"walk_south"
+frame_progress = 0.820815
+
+[node name="DetectionArea" type="Area2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+z_index = 2
+shape = SubResource("CapsuleShape2D_6ntch")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

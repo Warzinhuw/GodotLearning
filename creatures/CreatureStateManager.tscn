@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs5dhkxt46vse"]
+
+[ext_resource type="Script" path="res://scripts/creatures/CreatureStateManager.gd" id="1_d8w4i"]
+
+[node name="StateManager" type="Node"]
+script = ExtResource("1_d8w4i")

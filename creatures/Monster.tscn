@@ -1,0 +1,114 @@
+[gd_scene load_steps=19 format=3 uid="uid://clbobdr1vvfo3"]
+
+[ext_resource type="Script" path="res://scripts/creatures/CreatureStateManager.gd" id="1_l2amd"]
+[ext_resource type="Script" path="res://scripts/creatures/Monster.gd" id="2_usmhy"]
+[ext_resource type="Script" path="res://scripts/creatures/MonsterMovement.gd" id="3_qgifa"]
+[ext_resource type="Texture2D" uid="uid://bx7cfkbv8i043" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death00.png" id="4_dsf8w"]
+[ext_resource type="Texture2D" uid="uid://cp6f62b7sx7o6" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death01.png" id="5_gxiao"]
+[ext_resource type="Texture2D" uid="uid://dkncno87gho8w" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death02.png" id="6_57adm"]
+[ext_resource type="Texture2D" uid="uid://bgbjj3vx4wp5s" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death03.png" id="7_tv1dl"]
+[ext_resource type="Texture2D" uid="uid://b45sdmvwfvrhn" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death04.png" id="8_dcdpi"]
+[ext_resource type="Texture2D" uid="uid://c53ddpxvik562" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death05.png" id="9_coceu"]
+[ext_resource type="Texture2D" uid="uid://bx662djduaqha" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death06.png" id="10_auvjd"]
+[ext_resource type="Texture2D" uid="uid://b7p2riqmg8aty" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death07.png" id="11_1rwuf"]
+[ext_resource type="Texture2D" uid="uid://c2jon2jqgl4rj" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death08.png" id="12_dyonh"]
+[ext_resource type="Texture2D" uid="uid://cb7ms5dexjsrl" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death09.png" id="13_d0gku"]
+[ext_resource type="Texture2D" uid="uid://buvxhjnk3yw4p" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death10.png" id="14_evmgt"]
+[ext_resource type="Texture2D" uid="uid://c8dypwm71x0cw" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/death/death11.png" id="15_7rshj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dal4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bvbdo"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"idle_north",
+"speed": 15.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle_south",
+"speed": 15.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk_north",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_dsf8w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gxiao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_57adm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_tv1dl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dcdpi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_coceu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_auvjd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_1rwuf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_dyonh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_d0gku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_evmgt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_7rshj")
+}],
+"loop": true,
+"name": &"walk_south",
+"speed": 15.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gfnvv"]
+radius = 145.0
+height = 290.0
+
+[node name="CreatureStateManager" type="Node2D"]
+script = ExtResource("1_l2amd")
+
+[node name="Monster" type="Node" parent="."]
+script = ExtResource("2_usmhy")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Monster"]
+z_index = 255
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("3_qgifa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster/CharacterBody2D"]
+shape = SubResource("RectangleShape2D_3dal4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Monster/CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_bvbdo")
+animation = &"walk_south"
+
+[node name="DetectionArea" type="Area2D" parent="Monster/CharacterBody2D"]
+light_mask = 2
+visibility_layer = 2
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster/CharacterBody2D/DetectionArea"]
+z_index = 2
+shape = SubResource("CapsuleShape2D_gfnvv")
+debug_color = Color(0.22975, 0.637903, 0, 0.42)
+
+[connection signal="body_entered" from="Monster/CharacterBody2D/DetectionArea" to="Monster/CharacterBody2D" method="_on_detection_area_body_entered"]
