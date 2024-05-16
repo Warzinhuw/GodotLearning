@@ -1,25 +1,39 @@
 extends CharacterBody2D
 
-@export var rotationSpeed = 90.0
-@onready var player: Player = get_parent()
+var creature: Creature
 var mainCardinalDirection = "south"
+var sprite: AnimatedSprite2D
 
+func _init(creature: Creature):
+	self.creature = creature
+	sprite = creature.get_node("AnimatedSprite2D")
+	
 func _physics_process(delta):
-		doMoving()
+	doMoving()
 
 func doMoving():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	#print("input direction: {input_direction}, movementSpeed: {movementSpeed}".format({
-		#"input_direction": input_direction,
-		#"movementSpeed": player.movementSpeed
-	#}))
-	player.velocity = input_direction * player.movementSpeed
-	if player.velocity.x != 0 or player.velocity.y != 0:
+	creature.velocity = input_direction * creature.getAttribute(CREATURE_ATTRIBUTES.MOVEMENT_SPEED).currentValue
+	if creature.velocity.x != 0 or creature.velocity.y != 0:
 		var rotationData = Helpers.getSpriteRotationData(input_direction)
+		print("rotation data: ", rotationData)
 		mainCardinalDirection = rotationData.mainCardinalDirection
-		player.setState(player.Action.WALKING, mainCardinalDirection)
-		player.sprite.flip_h = rotationData.flip
-		player.sprite.rotation_degrees = rotationData.rotateByDegrees
+		creature.setState(creature.Action.WALKING, mainCardinalDirection)
+		sprite.flip_h = rotationData.flip
+		sprite.rotation_degrees = rotationData.rotateByDegrees
 	else:
-		player.setState(player.Action.IDLE, mainCardinalDirection)
-	player.move_and_slide()
+		creature.setState(creature.Action.IDLE, mainCardinalDirection)
+	update_animation()
+	creature.move_and_slide()
+
+func update_animation():
+	if sprite != null:
+		var animationName = "{action}_{mainCardinalDirection}".format({
+			"action": creature.currentAction,
+			"mainCardinalDirection": mainCardinalDirection
+		})
+		print("action running: {action}_{mainCardinalDirection}".format({
+			"action": creature.currentAction,
+			"mainCardinalDirection": mainCardinalDirection
+		}))
+		sprite.play(animationName)

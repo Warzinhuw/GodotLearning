@@ -21,7 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://kgb1u8738g1k" path="res://Sprites/Healthbar/healthbarUnder.png" id="20_3pu7d"]
 [ext_resource type="Texture2D" uid="uid://dc0rfpl7qbyl0" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk07.png" id="20_ovdom"]
 [ext_resource type="Texture2D" uid="uid://cfdmvedikuyrc" path="res://Sprites/Healthbar/healthbarProgress.png" id="21_oj77a"]
-[ext_resource type="Script" path="res://scripts/creatures/HealthBar.gd" id="22_rg5i8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euaxr"]
 size = Vector2(32, 32)
@@ -110,12 +109,25 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="GDScript" id="GDScript_kxt6h"]
+script/source = "extends TextureProgressBar
+
+@onready var monster: Monster = get_node(\"Monster\")
+@onready var progressBar: TextureProgressBar = $TextureProgressBar
+
+func _ready():
+	progressBar.max_value = monster.maxHealth
+
+
+func _on_character_body_2d_health_changed(newHealth):
+	progressBar.value = newHealth
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f654s"]
 size = Vector2(21.0176, 38.4935)
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_1vdda")
-currentHealth = 100
+script = ExtResource("1_sw6re")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 3
@@ -143,7 +155,7 @@ nine_patch_stretch = true
 texture_under = ExtResource("20_3pu7d")
 texture_progress = ExtResource("21_oj77a")
 tint_over = Color(0.0605303, 0.0605303, 0.0605303, 1)
-script = ExtResource("22_rg5i8")
+script = SubResource("GDScript_kxt6h")
 
 [node name="ManaBar" type="TextureProgressBar" parent="."]
 anchors_preset = 5
@@ -162,7 +174,7 @@ texture_under = ExtResource("20_3pu7d")
 texture_progress = ExtResource("21_oj77a")
 tint_over = Color(0.0605303, 0.0605303, 0.0605303, 1)
 tint_progress = Color(0, 0.501262, 0.874596, 1)
-script = ExtResource("22_rg5i8")
+script = SubResource("GDScript_kxt6h")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
