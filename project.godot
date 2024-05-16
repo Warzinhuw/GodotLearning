@@ -18,9 +18,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 Helpers="*res://scripts/Helpers.gd"
+CreaturesAttributes="*res://scripts/creatures/CREATURES_ATTRIBUTES.gd"
 
 [editor]
 
+script/templates_search_path="res://scripts/templates"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 

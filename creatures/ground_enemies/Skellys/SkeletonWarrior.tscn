@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://80dc16dijato"]
 
-[ext_resource type="PackedScene" uid="uid://c51mxuel0nsfj" path="res://creatures/templates/Monster.tscn" id="1_ox5tj"]
+[ext_resource type="PackedScene" uid="uid://c51mxuel0nsfj" path="res://creatures/templates/Monster_old.tscn" id="1_ox5tj"]
 [ext_resource type="Texture2D" uid="uid://cmubq7bt6yqw5" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk N/No Shield/Standing.png" id="2_dwwyv"]
 [ext_resource type="Texture2D" uid="uid://bhekbmgplvdnh" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk S/No Shield/Standing.png" id="3_c2s5r"]
 [ext_resource type="Texture2D" uid="uid://bpolvxdi3tf61" path="res://Sprites/fofsamplesprites/creatures/Skellys/Skeleton/Walk N/No Shield/Skeletron Walk N 1.png" id="4_w40bk"]
@@ -104,7 +104,6 @@ radius = 145.0
 height = 290.0
 
 [node name="Monster" instance=ExtResource("1_ox5tj")]
-creatureName = ""
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_1jtp2")

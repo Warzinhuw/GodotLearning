@@ -1,0 +1,179 @@
+[gd_scene load_steps=29 format=3 uid="uid://i56cl525vdtn"]
+
+[ext_resource type="Script" path="res://scripts/Creature.gd" id="1_phv87"]
+[ext_resource type="Script" path="res://scripts/creatures/Monster/Attributes/health.gd" id="2_hp1k4"]
+[ext_resource type="Script" path="res://creatures/templates/Monster/movement_speed.gd" id="3_vyv62"]
+[ext_resource type="Script" path="res://creatures/templates/Monster/name.gd" id="4_3d1ny"]
+[ext_resource type="Texture2D" uid="uid://cxykt62gg3tlb" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk08.png" id="4_7p5k7"]
+[ext_resource type="Texture2D" uid="uid://kgb1u8738g1k" path="res://Sprites/Healthbar/healthbarUnder.png" id="5_3gvrp"]
+[ext_resource type="Script" path="res://creatures/templates/Monster/HealthBar.gd" id="5_bru8d"]
+[ext_resource type="Script" path="res://creatures/templates/Monster/CreatureNameTag.gd" id="5_wig0u"]
+[ext_resource type="Texture2D" uid="uid://cfdmvedikuyrc" path="res://Sprites/Healthbar/healthbarProgress.png" id="6_nd5wr"]
+[ext_resource type="Texture2D" uid="uid://dtictjdhjkuev" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/north/north08.png" id="9_vg2du"]
+[ext_resource type="Texture2D" uid="uid://c26oljqd3opk0" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/north/north00.png" id="11_fvqgu"]
+[ext_resource type="Texture2D" uid="uid://2v04fogg0i3m" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/north/north01.png" id="12_uqomp"]
+[ext_resource type="Texture2D" uid="uid://bepbbnhv8oi4f" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/north/north02.png" id="13_ebm2b"]
+[ext_resource type="Texture2D" uid="uid://ddgutvvshym28" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/north/north03.png" id="14_ir4j0"]
+[ext_resource type="Texture2D" uid="uid://dhu1q7thruti5" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/north/north04.png" id="15_ihufa"]
+[ext_resource type="Texture2D" uid="uid://txu1ms5fg6jc" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/north/north05.png" id="16_yisj4"]
+[ext_resource type="Texture2D" uid="uid://e0f6oej1oth3" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/north/north06.png" id="17_5st7g"]
+[ext_resource type="Texture2D" uid="uid://dsyqkxesrrc81" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/north/north07.png" id="18_d6nhq"]
+[ext_resource type="Texture2D" uid="uid://cj0mxrf007xqy" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk00.png" id="19_ejb4w"]
+[ext_resource type="Texture2D" uid="uid://bfgbph3ya8yfe" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk01.png" id="20_cje8i"]
+[ext_resource type="Texture2D" uid="uid://oome846pb8rh" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk02.png" id="21_sqinn"]
+[ext_resource type="Texture2D" uid="uid://bwix5ekwud143" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk03.png" id="22_hhlx4"]
+[ext_resource type="Texture2D" uid="uid://0qalim7soc6y" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk04.png" id="23_tw3pp"]
+[ext_resource type="Texture2D" uid="uid://dqdab6tqvdy5r" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk05.png" id="24_aa663"]
+[ext_resource type="Texture2D" uid="uid://ot1jnk71jqvc" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk06.png" id="25_2msyx"]
+[ext_resource type="Texture2D" uid="uid://dc0rfpl7qbyl0" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk07.png" id="26_7kfn3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jmm0i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_vg2du")
+}],
+"loop": true,
+"name": &"idle_north",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_7p5k7")
+}],
+"loop": true,
+"name": &"idle_south",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_fvqgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_uqomp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ebm2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ir4j0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ihufa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_yisj4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_5st7g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_d6nhq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vg2du")
+}],
+"loop": true,
+"name": &"walk_north",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_ejb4w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_cje8i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_sqinn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_hhlx4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_tw3pp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_aa663")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_2msyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_7kfn3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7p5k7")
+}],
+"loop": true,
+"name": &"walk_south",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_46rwf"]
+
+[node name="Monster" type="CharacterBody2D"]
+script = ExtResource("1_phv87")
+
+[node name="Attributes" type="Node2D" parent="."]
+
+[node name="name" type="Node" parent="Attributes"]
+script = ExtResource("4_3d1ny")
+creatureName = "Elf Sample"
+
+[node name="health" type="Node" parent="Attributes"]
+script = ExtResource("2_hp1k4")
+health = 180
+max_health = 200
+
+[node name="movement_speed" type="Node" parent="Attributes"]
+script = ExtResource("3_vyv62")
+movement_speed = 300
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = -49.0
+offset_right = 50.0
+offset_bottom = -37.0
+grow_horizontal = 2
+max_value = 200.0
+value = 180.0
+nine_patch_stretch = true
+texture_under = ExtResource("5_3gvrp")
+texture_progress = ExtResource("6_nd5wr")
+script = ExtResource("5_bru8d")
+
+[node name="CreatureName" type="RichTextLabel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -35.0
+offset_right = 100.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+bbcode_enabled = true
+text = "[center]Elf Sample[center]"
+scroll_active = false
+script = ExtResource("5_wig0u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jmm0i")
+animation = &"idle_south"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_46rwf")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[connection signal="nameChanged" from="Attributes/name" to="CreatureName" method="_on_name_name_changed"]
+[connection signal="maxValueChanged" from="Attributes/health" to="HealthBar" method="_on_health_max_value_changed"]
+[connection signal="valueChanged" from="Attributes/health" to="HealthBar" method="_on_health_value_changed"]

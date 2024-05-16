@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://tevvrc55i4ki"]
+
+[ext_resource type="Script" path="res://scripts/templates/Node/attribute_template.gd" id="1_opqif"]
+
+[node name="NewAttribute" type="Node"]
+script = ExtResource("1_opqif")
