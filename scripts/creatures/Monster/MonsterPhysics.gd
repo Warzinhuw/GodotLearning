@@ -1,10 +1,13 @@
-@tool 
-extends Monster
+@tool extends Monster
 
-signal healthChanged(newHealth: int)
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 var monsterInRange: bool = false
 var player: Player = null
+
+func _ready():
+	super._ready()
+	self.setSprite(sprite)
 	
 func _physics_process(_delta):
 	if monsterInRange and self.chaseTarget:

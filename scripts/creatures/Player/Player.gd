@@ -1,6 +1,4 @@
-extends Creature
-
-class_name Player
+class_name Player extends Creature
 
 
 var experience = 0
