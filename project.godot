@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Helpers="*res://scripts/Helpers.gd"
 CreaturesAttributes="*res://scripts/creatures/CREATURES_ATTRIBUTES.gd"
 TilesSignalsList="*res://scripts/floor/tiles/TilesSignals.gd"
+GlobalConstants="*res://scripts/global_constants/GLOBAL_CONSTANTS.gd"
 
 [editor]
 

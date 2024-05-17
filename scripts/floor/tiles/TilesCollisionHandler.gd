@@ -2,6 +2,7 @@ class_name TilesCollisionHandler extends Area2D
 
 signal tileChanged
 
+@export var creature: Creature
 var currentTilemap: TileMap
 var currentTileData: TileData
 
@@ -20,10 +21,10 @@ func processTileMapCollision(body, body_rid: RID):
 			currentTileData = tileData
 			dealWithSignalEmittion(index, getTileDataProperty(currentTileData, index))
 
+func dealWithSignalEmittion(propertyId, propertyValue):
+	TILES_SIGNALS_CONSTANS.TilesCallback[propertyId].callback(creature, propertyValue)
+
 func getTileDataProperty(tileData : TileData, propertyID: int):
 	return tileData["custom_data_{property}".format({
 		"property" : propertyID
 	})]
-	
-func dealWithSignalEmittion(propertyId, propertyValue):
-	print(TILES_SIGNALS_CONSTANS.TileProperty.slow_creature, " ", propertyValue)

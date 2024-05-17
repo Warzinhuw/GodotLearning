@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://i56cl525vdtn"]
+[gd_scene load_steps=33 format=3 uid="uid://i56cl525vdtn"]
 
 [ext_resource type="Script" path="res://scripts/Creature.gd" id="1_phv87"]
 [ext_resource type="Script" path="res://scripts/creatures/Player/Movement.gd" id="2_abja2"]
@@ -28,9 +28,8 @@
 [ext_resource type="Texture2D" uid="uid://dqdab6tqvdy5r" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk05.png" id="24_aa663"]
 [ext_resource type="Texture2D" uid="uid://ot1jnk71jqvc" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk06.png" id="25_2msyx"]
 [ext_resource type="Texture2D" uid="uid://dc0rfpl7qbyl0" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk07.png" id="26_7kfn3"]
-[ext_resource type="Script" path="res://creatures/templates/Monster/ConditionsObserver.gd" id="29_0pwpf"]
+[ext_resource type="Script" path="res://scripts/floor/tiles/SlowTileHandler.gd" id="29_egj22"]
 [ext_resource type="Script" path="res://scripts/floor/tiles/TilesCollisionHandler.gd" id="29_pgxfd"]
-[ext_resource type="PackedScene" uid="uid://cm5ep3yohi7yk" path="res://scenes/creatures/conditions/debuffs/SlowFromTile.tscn" id="30_8wgle"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jmm0i"]
 animations = [{
@@ -150,7 +149,6 @@ max_health = 200
 [node name="movement_speed" type="Node" parent="Attributes"]
 script = ExtResource("3_vyv62")
 movement_speed = 300
-max_movement_speed = 300
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 anchors_preset = 5
@@ -192,41 +190,6 @@ shape = SubResource("RectangleShape2D_46rwf")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="Conditions" type="Node" parent="."]
-script = ExtResource("29_0pwpf")
-
-[node name="Buffs" type="Node" parent="Conditions"]
-
-[node name="Debuffs" type="Node" parent="Conditions"]
-
-[node name="SlowFromTile" parent="Conditions/Debuffs" instance=ExtResource("30_8wgle")]
-
-[node name="ConditionsPanel" type="Panel" parent="Conditions"]
-self_modulate = Color(1, 1, 1, 0)
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -626.0
-offset_top = -712.0
-offset_right = -526.0
-offset_bottom = -700.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ConditionsHBox" type="HBoxContainer" parent="Conditions/ConditionsPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 13
-
 [node name="TilesCollisionHandler" type="Area2D" parent="." node_paths=PackedStringArray("creature")]
 collision_layer = 3
 collision_mask = 3
@@ -234,15 +197,14 @@ script = ExtResource("29_pgxfd")
 creature = NodePath("..")
 
 [node name="SlowCreatureTile" type="Node2D" parent="TilesCollisionHandler"]
+script = ExtResource("29_egj22")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TilesCollisionHandler"]
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_46rwf")
 
-[connection signal="conditionChanged" from="." to="Conditions" method="_on_monster_condition_changed"]
 [connection signal="nameChanged" from="Attributes/name" to="CreatureName" method="_on_name_name_changed"]
 [connection signal="maxValueChanged" from="Attributes/health" to="HealthBar" method="_on_health_max_value_changed"]
 [connection signal="valueChanged" from="Attributes/health" to="HealthBar" method="_on_health_value_changed"]
 [connection signal="valueChanged" from="Attributes/movement_speed" to="Appearance/AnimatedSprite2D" method="_on_movement_speed_value_changed"]
 [connection signal="body_shape_entered" from="TilesCollisionHandler" to="TilesCollisionHandler" method="_on_body_shape_entered"]
-[connection signal="body_shape_exited" from="TilesCollisionHandler" to="TilesCollisionHandler" method="_on_body_shape_exited"]
