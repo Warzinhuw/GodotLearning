@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://i56cl525vdtn"]
+[gd_scene load_steps=32 format=3 uid="uid://i56cl525vdtn"]
 
 [ext_resource type="Script" path="res://scripts/Creature.gd" id="1_phv87"]
 [ext_resource type="Script" path="res://scripts/creatures/Player/Movement.gd" id="2_abja2"]
@@ -28,8 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://dqdab6tqvdy5r" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk05.png" id="24_aa663"]
 [ext_resource type="Texture2D" uid="uid://ot1jnk71jqvc" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk06.png" id="25_2msyx"]
 [ext_resource type="Texture2D" uid="uid://dc0rfpl7qbyl0" path="res://Sprites/fofsamplesprites/creatures/elven_warrior/south walk/south walk07.png" id="26_7kfn3"]
-[ext_resource type="Script" path="res://scripts/floor/tiles/SlowTileHandler.gd" id="29_egj22"]
-[ext_resource type="Script" path="res://scripts/floor/tiles/TilesCollisionHandler.gd" id="29_pgxfd"]
+[ext_resource type="Script" path="res://scripts/creatures/SpecialTileCollisionHandler.gd" id="29_cy3nq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jmm0i"]
 animations = [{
@@ -190,21 +189,15 @@ shape = SubResource("RectangleShape2D_46rwf")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="TilesCollisionHandler" type="Area2D" parent="."]
-collision_layer = 3
+[node name="RayCast2D" type="RayCast2D" parent="." node_paths=PackedStringArray("creature")]
+exclude_parent = false
 collision_mask = 3
-script = ExtResource("29_pgxfd")
+script = ExtResource("29_cy3nq")
+creature = NodePath("..")
 
-[node name="SlowCreatureTile" type="Node2D" parent="TilesCollisionHandler" node_paths=PackedStringArray("creature")]
-script = ExtResource("29_egj22")
-creature = NodePath("../..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TilesCollisionHandler"]
-scale = Vector2(3, 3)
-shape = SubResource("RectangleShape2D_46rwf")
+[node name="TileCollisionHandler" type="Node2D" parent="RayCast2D"]
 
 [connection signal="nameChanged" from="Attributes/name" to="CreatureName" method="_on_name_name_changed"]
 [connection signal="maxValueChanged" from="Attributes/health" to="HealthBar" method="_on_health_max_value_changed"]
 [connection signal="valueChanged" from="Attributes/health" to="HealthBar" method="_on_health_value_changed"]
 [connection signal="valueChanged" from="Attributes/movement_speed" to="Appearance/AnimatedSprite2D" method="_on_movement_speed_value_changed"]
-[connection signal="body_shape_entered" from="TilesCollisionHandler" to="TilesCollisionHandler" method="_on_body_shape_entered"]

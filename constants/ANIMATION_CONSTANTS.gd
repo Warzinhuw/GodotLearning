@@ -1,0 +1,4 @@
+class_name ANIMATION_CONSTANTS  extends Node
+
+const MAX_ANIMATION_FPS = 40
+const MIN_ANIMATION_FPS = 5
